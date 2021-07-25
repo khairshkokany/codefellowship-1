@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" th:href="@{/css/nav.css}">
+
+</head>
+<body>
+<nav class="navbar" th:fragment="navbar">
+  <a class="brand" href="/">Songr</a>
+  <ul>
+    <li>
+      <a href="/hello">Greeting</a>
+    </li>
+    <li>
+      <a active href="/capitalize/this word">Capitalize</a>
+    </li>
+    <li>
+      <a href="/albums">Albums</a>
+    </li>
+    <li>
+      <a href="/songs">Songs</a>
+    </li>
+    <li>
+      <a href="/addalbum">Add Album</a>
+    </li>
+    <li>
+      <a href="/addsong">Add Song</a>
+    </li>
+  </ul>
+</nav>
+</body>
+</html>
