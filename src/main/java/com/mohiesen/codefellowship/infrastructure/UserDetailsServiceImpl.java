@@ -13,7 +13,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     ApplicationUserRepository applicationUserRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        ApplicationUser applicationUser = applicationUserRepository.findApplicationUserByUserName(username);
+        ApplicationUser applicationUser = applicationUserRepository.findApplicationUserByUsername(username);
         if(applicationUser == null) {
             System.out.println("User not Found");
             throw new UsernameNotFoundException(username + " not Found");
