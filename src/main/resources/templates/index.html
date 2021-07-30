@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/nav.css}">
+</head>
+<body>
+<nav th:replace="fragments/navfrag :: navbar"> </nav>
+<p>
+    Code Fellow Is a social Website for Coders.
+</p>
+
+<p>
+    Get Started Sign Up now
+</p>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+</body>
+</html>

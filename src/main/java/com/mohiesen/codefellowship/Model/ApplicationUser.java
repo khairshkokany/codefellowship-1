@@ -1,11 +1,11 @@
 package com.mohiesen.codefellowship.Model;
 
-import com.mohiesen.codefellowship.infrastructure.ApplicationUserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -13,15 +13,21 @@ public class ApplicationUser implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true)
-    private String userName;
+    private String username;
     private String password;
     private String firstName;
     private String lastName;
     private String dateOfBirth;
     private String bio;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "postOwner")
+    List<Post> posts;
 
-    public ApplicationUser(String userName, String password, String firstName, String lastName, String dateOfBirth, String bio) {
-        this.userName = userName;
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public ApplicationUser(String username, String password, String firstName, String lastName, String dateOfBirth, String bio) {
+        this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -49,13 +55,10 @@ public class ApplicationUser implements UserDetails {
         this.bio = bio;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public Long getId() {
         return id;
@@ -77,8 +80,17 @@ public class ApplicationUser implements UserDetails {
         return bio;
     }
 
-    public String getUserName() {
-        return userName;
+    @Override
+    public String toString() {
+        return "ApplicationUser{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", bio='" + bio + '\'' +
+                '}';
     }
 
 
@@ -89,31 +101,31 @@ public class ApplicationUser implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return username;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }

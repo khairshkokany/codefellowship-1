@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/nav.css}">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
+<nav th:replace="fragments/navfrag :: navbar"> </nav>
 <div class="form-style-5">
     <form method="post" th:action="@{/signup}">
         <fieldset>
@@ -14,7 +16,7 @@
             <input type="password" name="password" placeholder="Password">
             <input type="text" name="firstname" placeholder="First Name">
             <input type="text" name="lastname" placeholder="Last Name">
-            <input type="text" name="dateofbirth" placeholder="Date Of Birth">
+            <input type="date" name="dateofbirth" placeholder="Date Of Birth">
             <textarea name="bio" placeholder="About yourself"></textarea>
 
         </fieldset>

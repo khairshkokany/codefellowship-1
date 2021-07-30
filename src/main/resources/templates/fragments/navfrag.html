@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -8,25 +8,22 @@
 </head>
 <body>
 <nav class="navbar" th:fragment="navbar">
-  <a class="brand" href="/">Songr</a>
+  <a class="brand" href="/">CodeFellow</a>
   <ul>
     <li>
-      <a href="/hello">Greeting</a>
+      <a href="/">Home</a>
     </li>
-    <li>
-      <a active href="/capitalize/this word">Capitalize</a>
+    <li sec:authorize = "!isAuthenticated()">
+      <a active href="/signup">Sign Up</a>
     </li>
-    <li>
-      <a href="/albums">Albums</a>
+    <li sec:authorize = "!isAuthenticated()">
+      <a href="/login">Login</a>
     </li>
-    <li>
-      <a href="/songs">Songs</a>
+    <li sec:authorize = "isAuthenticated()">
+      <a href="/users">Follow Users</a>
     </li>
-    <li>
-      <a href="/addalbum">Add Album</a>
-    </li>
-    <li>
-      <a href="/addsong">Add Song</a>
+    <li  >
+      <a href="/profile" class="nav-item" sec:authorize="isAuthenticated()" sec:authentication="name"></a>
     </li>
   </ul>
 </nav>
