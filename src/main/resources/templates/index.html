@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" th:href="@{/css/nav.css}">
 </head>
 <body>
-<nav th:replace="fragments/navfrag :: navbar"> </nav>
-<p>
+<nav th:replace="fragments/navfrag :: navbar" > </nav>
+<p >
     Code Fellow Is a social Website for Coders.
 </p>
 
-<p>
+<p sec:authorize = "!isAuthenticated()">
     Get Started Sign Up now
 </p>
-<form th:action="@{/logout}" method="post">
+<form sec:authorize = "isAuthenticated()" th:action="@{/logout}" method="post" >
     <input type="submit" value="Sign Out"/>
 </form>
 </body>

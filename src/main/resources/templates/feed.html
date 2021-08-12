@@ -10,10 +10,10 @@
 <body>
 <nav th:replace="fragments/navfrag :: navbar"> </nav>
 <ul th:each = "post : ${posts}">
-    <p th:text="${post.getPostOwner().getUsername()} ">
+    <p th:text="${post.getPostOwner().getUsername()} " class="user">
 
     </p>
-    <li th:text="${post.getBody()} + '  ' + ${post.getTimeStamp()}">
+    <li th:text="${post.getBody()} + '  ' + ${post.getTimeStamp()}" class="post">
 
     </li>
 </ul>

@@ -41,3 +41,35 @@ body {
 .number3 {
     font-weight: 500
 }
+
+form{
+    width: 17%;
+    margin: auto;
+}
+
+input[type = "submit"]{
+    background-color: cyan;
+    border: none;
+    margin-top: 13px;
+}
+
+h3 {
+    width: 17%;
+    margin: 40px auto;
+}
+
+.post{
+    border: 1px solid whitesmoke;
+    background-color: lightgrey;
+    list-style-type: none;
+    width: 35%;
+    margin: auto;
+    border-radius: 15%
+    ;
+    text-align: center;
+}
+
+.user {
+    width: 12%;
+    margin: auto;
+}
