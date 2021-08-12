@@ -5,8 +5,9 @@
 
     <title>Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{/css/profile.css}">
     <link rel="stylesheet" th:href="@{/css/nav.css}">
+    <link rel="stylesheet" th:href="@{/css/profile.css}">
+
 </head>
 <body>
 <nav th:replace="fragments/navfrag :: navbar"> </nav>
@@ -34,11 +35,12 @@
         <input type="submit" value="Create Post" />
     </form>
 </div>
+<h3>
+    My posts
+</h3>
 <ul th:each="post : ${user.getPosts()}">
-    <li>
-        My Posts
-    </li>
-    <li th:text="${post.getBody()}">
+
+    <li th:text="${post.getBody()}" class="post">
 
     </li>
 </ul>
