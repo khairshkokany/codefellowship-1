@@ -81,11 +81,21 @@ public class MainController {
     }
 
     @GetMapping(value = "/users")
-    public String getAllUsers(Model users){
+    public String getAllUsers(Model users , Principal p){
         List<ApplicationUser> allUsers = applicationUserRepository.findAll();
         users.addAttribute("users" , allUsers);
         System.out.println(allUsers);
+        users.addAttribute("loggeduser" , applicationUserRepository.findApplicationUserByUsername(p.getName()));
         return "users";
+    }
+
+    @PostMapping("/followUser/{username}")
+    public RedirectView followUser(Principal p,@PathVariable String username){
+        ApplicationUser currentUser = applicationUserRepository.findApplicationUserByUsername(p.getName());
+        ApplicationUser userWantedToFollow = applicationUserRepository.findApplicationUserByUsername(username);
+        currentUser.addFollowToUser(userWantedToFollow);
+        applicationUserRepository.save(currentUser);
+        return new RedirectView("/users/" + applicationUserRepository.findApplicationUserByUsername(p.getName()).getId());
     }
 }
 
