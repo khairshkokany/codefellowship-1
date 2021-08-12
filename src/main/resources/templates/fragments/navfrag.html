@@ -22,6 +22,9 @@
     <li sec:authorize = "isAuthenticated()">
       <a href="/users">Follow Users</a>
     </li>
+    <li sec:authorize = "isAuthenticated()">
+      <a href="/feed">Feed</a>
+    </li>
     <li  >
       <a href="/profile" class="nav-item" sec:authorize="isAuthenticated()" sec:authentication="name"></a>
     </li>

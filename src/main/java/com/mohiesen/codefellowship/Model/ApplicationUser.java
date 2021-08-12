@@ -2,10 +2,8 @@ package com.mohiesen.codefellowship.Model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -19,11 +17,46 @@ public class ApplicationUser implements UserDetails {
     private String lastName;
     private String dateOfBirth;
     private String bio;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "postOwner")
-    List<Post> posts;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "postOwner" , cascade = CascadeType.ALL)
+    private List<Post> posts;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "users_users",
+            joinColumns = {
+                    @JoinColumn(name = "user_id", referencedColumnName = "id",
+                            nullable = false)},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "following_user_id", referencedColumnName = "id",
+                            nullable = false)})
+    private List<ApplicationUser> users = new ArrayList<>();
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
+    public List<ApplicationUser> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<ApplicationUser> users) {
+        this.users = users;
+    }
 
     public List<Post> getPosts() {
         return posts;
+    }
+
+
+    public void addFollowToUser(ApplicationUser user){
+        this.users.add(user);
+    }
+
+    public void unFollowUser(ApplicationUser user){
+        this.users.remove(user);
+    }
+
+    public boolean isFollowedUser(ApplicationUser user){
+        return this.users.contains(user);
     }
 
     public ApplicationUser(String username, String password, String firstName, String lastName, String dateOfBirth, String bio) {

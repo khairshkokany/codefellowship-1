@@ -18,7 +18,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
 
 @Controller
 public class PostController {
@@ -36,5 +36,18 @@ public class PostController {
         postRepository.save(post);
         userPost.addAttribute("posts" , ownerUser.getPosts());
         return new RedirectView("/profile");
+    }
+
+    @GetMapping("/feed")
+    public String getFeed(Principal p , Model m) {
+        ApplicationUser loggedUser = applicationUserRepository.findApplicationUserByUsername(p.getName());
+        List<ApplicationUser> followedUsers = loggedUser.getUsers();
+        List<Post> allUsersPosts = new ArrayList<>();
+        for (int i = 0; i < followedUsers.size(); i++) {
+            allUsersPosts.addAll(followedUsers.get(i).getPosts());
+        }
+        System.out.println(allUsersPosts);
+        m.addAttribute("posts" , allUsersPosts);
+        return "feed";
     }
 }
